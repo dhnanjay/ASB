@@ -117,7 +117,7 @@
                 var pswd = $('#pswd').val();
                 var stDate = '';
                 sTick = '';
-                $.blockUI({ message: '<h3><img src="./css/img/AS.png" /> Please Wait...</h3>',
+                $.blockUI({ message: '<h3><img src="./CSS/img/slogo.png" /> Please Wait...</h3>',
                     css: { border: '4px solid #6E6E6E',
                         width:   '22%',
                         backgroundColor:'#fff',
@@ -237,7 +237,7 @@
                             event.preventDefault();
                         }
                         prd = data.STOCK;
-
+                        $('#dateip').val(cDate());
                         $.each(data.STOCK, function(index) {
                             $('#sku').append('<div class="' + 'ui-block-a"' + '>' + '<div data-controltype="' + 'textblock"' + '>'
                             + '<p><b>' + data.STOCK[index].DESC + '&nbsp;' + '(' + data.STOCK[index].INH_QUANT + ')' + '</b></p></div></div><div class="' + 'ui-block-b"'
@@ -302,17 +302,33 @@
                 })
             });
         }); // function ends
+        function cDate() {
+            var date = new Date();
+
+// GET YYYY, MM AND DD FROM THE DATE OBJECT
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth()+1).toString();
+            var dd  = date.getDate().toString();
+
+// CONVERT mm AND dd INTO chars
+            var mmChars = mm.split('');
+            var ddChars = dd.split('');
+
+// CONCAT THE STRINGS IN YYYY-MM-DD FORMAT
+            var datestring = yyyy + '-' + (mmChars[1]?mm:"0"+mmChars[0]) + '-' + (ddChars[1]?dd:"0"+ddChars[0]);
+            return (datestring);
+        }
     </script>
 </head>
 <body>
 <div data-role="page" data-control-title="Home" id="page1" style="background-color: #ffffff">
     <div data-theme="h" data-role="header">
         <span class="ui-title"></span>
-        <img src="./css/img/slogo.png" class="ui-btn-right" />
+        <img src="./CSS/img/slogo.png" class="ui-btn-right" />
     </div>
     <div role="main" class="ui-content">
         <div style=" text-align:center" data-controltype="image" id="logo">
-            <img style="width: 80%; height: 150px" src="./css/img/americanstandard-logo.gif">
+            <img style="width: 80%; height: 150px" src="./CSS/img/americanstandard-logo.gif">
         </div>
         <div class="ui-field-contain Inputbox" data-controltype="textinput">
             <input name="" id="usrname" placeholder="Username" value="" type="text" required>
@@ -370,7 +386,7 @@
 <div data-role="page" data-control-title="jobList" id="page2" style="background-color: #ffffff">
     <div data-theme="a" data-role="header">
         <h1 id="pg2" class="ui-title hdr"></h1>
-        <img src="./css/img/slogo.png" class="ui-btn-right" />
+        <img src="./CSS/img/slogo.png" class="ui-btn-right" />
     </div>
     <div role="main" class="ui-content">
         <div data-controltype="textblock">
@@ -397,7 +413,7 @@
         <a id="backbtn1" data-inline="true" data-rel="back" href="#page2" data-icon="back"
            data-iconpos="left" class="ui-btn  ui-icon-back ui-btn-icon-left back">
         </a>
-        <img src="./css/img/slogo.png" class="ui-btn-right" />
+        <img src="./CSS/img/slogo.png" class="ui-btn-right" />
     </div>
     <div role="main" class="ui-content">
 
@@ -441,7 +457,7 @@
         <a id="backbtn2" data-rel="back" href="#page4" data-icon="back" data-iconpos="left"
            class="ui-btn ui-btn-left ui-icon-back ui-btn-icon-left back">
         </a>
-        <img src="./css/img/slogo.png" class="ui-btn-right" />
+        <img src="./CSS/img/slogo.png" class="ui-btn-right" />
     </div>
     <div role="main" class="ui-content">
         <div class="ui-field-contain" data-controltype="dateinput">
