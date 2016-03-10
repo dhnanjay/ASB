@@ -1,13 +1,9 @@
 {
   "project": {
     "projectSettingsVersion": "2.0.0",
-    "initialAutoPluginCount": 2,
+    "initialAutoPluginCount": 0,
     "currentBuildConfiguration": "Android",
     "projectFiles": {},
-    "projectDirectories": {},
-    "currentService": {
-      "endPoint": "Tracking",
-      "service": "google_analytics"
-    }
+    "projectDirectories": {}
   }
 }

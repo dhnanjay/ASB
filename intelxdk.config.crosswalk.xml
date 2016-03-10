@@ -7,13 +7,23 @@
 <name>ASB_Repair_Agent</name>
 <content src="index.html"/>
 <access origin="*"/>
+<icon platform="android" src="Icons/36.png" density="ldpi" width="36" height="36"/>
+<icon platform="android" src="Icons/48.png" density="mdpi" width="48" height="48"/>
+<icon platform="android" src="Icons/72.png" density="hdpi" width="72" height="72"/>
+<icon platform="android" src="Icons/96.png" density="xhdpi" width="96" height="96"/>
+<splash platform="android" src="Icons/HDPI.png" density="hdpi" width="480" height="640" orientation="portrait"/>
+<splash platform="android" src="Icons/XHDPI.png" density="xhdpi" width="720" height="960" orientation="portrait"/>
+<splash platform="android" src="Icons/LDPI.png" density="ldpi" width="320" height="426" orientation="portrait"/>
+<splash platform="android" src="Icons/MDPI.png" density="mdpi" width="320" height="470" orientation="portrait"/>
 <intelxdk:plugin intelxdk:name="Device" intelxdk:value="cordova-plugin-device" intelxdk:version="1.1.0" intelxdk:checksum="1eae5d64"/>
 <intelxdk:plugin intelxdk:name="Splashscreen" intelxdk:value="cordova-plugin-splashscreen" intelxdk:version="2.1.0" intelxdk:checksum="170efb68"/>
+<intelxdk:plugin intelxdk:name="Device" intelxdk:value="cordova-plugin-device" intelxdk:version="1.1.0" intelxdk:checksum="1eae5d64" intelxdk:type="file"/>
+<intelxdk:plugin intelxdk:name="Splashscreen" intelxdk:value="cordova-plugin-splashscreen" intelxdk:version="2.1.0" intelxdk:checksum="170efb68" intelxdk:type="file"/>
 <intelxdk:plugin intelxdk:name="Cordova Legacy Whitelist Plugin" intelxdk:value="cordova-plugin-legacy-whitelist" intelxdk:version="1.1.0"/>
 <preference name="android-minSdkVersion" value="14"/>
 <preference name="android-targetSdkVersion" value="19"/>
 <preference name="android-installLocation" value="auto"/>
 <intelxdk:crosswalk version="15"/>
+<preference name="splashscreen" value="splash"/>
 <!--creationInfo:{"src":"","projectTypeName":"com.intel.xdk.projecttype.jsapp"}-->
-<preference name="debuggable" value="false"/>
-<preference name="SplashScreenDelay" value="0"/></widget>
+<preference name="debuggable" value="false"/></widget>

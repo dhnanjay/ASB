@@ -20,17 +20,11 @@ $(function() {
         var pswd = $('#pswd').val();
         var stDate = '';
         sTick = '';
-        if (cOnline() == "offline") {
+        if (cOnline() === "offline") {
             event.preventDefault();
             return;
         }
-        $.blockUI({ message: '<h3><img src="./CSS/img/slogo.png" /> Please Wait...</h3>',
-            css: { border: '4px solid #6E6E6E',
-                width:   '22%',
-                backgroundColor:'#fff',
-                opacity:     0.2,
-                top:    '25%',
-                left:   '40%' }  });
+        block("Please Wait...");
         $.ajax({
             url: gURL,
             dataType: 'json',
@@ -73,6 +67,12 @@ $(function() {
                 });
                 gVendorID = data.VENDORID[0].VENDOR;
                 localStorage.setItem("vendor",gVendorID);
+            }, // success function ends
+            error: function(xhr, textStatus, errorThrown) {
+                $.unblockUI();
+                event.preventDefault();
+                console.log("server unreachable");
+                return;
             }
         }); // Ajax Ends
     }); // Click function ends
@@ -84,13 +84,7 @@ function myfunction(a) {
         event.preventDefault();
         return;
     }
-    $.blockUI({ message: '<h3><img src="./CSS/img/slogo.png" /> Please Wait...</h3>',
-        css: { border: '4px solid #6E6E6E',
-            width:   '22%',
-            backgroundColor:'#fff',
-            opacity:     0.2,
-            top:    '25%',
-            left:   '40%' }  });
+    block("Please Wait...");
     sTick = '';
     var b = a.getElementsByTagName("STRONG")[0].textContent;
     var c = b.split("Service Ticket:");
@@ -130,6 +124,12 @@ function myfunction(a) {
             catch(err) {
                 console.log(err.message);
             }
+        }, // success function ends
+        error: function(xhr, textStatus, errorThrown) {
+            $.unblockUI();
+            event.preventDefault();
+            console.log("server unreachable");
+            return;
         }
     }); // Ajax Ends
     setTimeout($.unblockUI, 100);
@@ -218,10 +218,16 @@ $(function() {
             },
             success: function(data) {
                 // Your Code here
+                block("Request Submitted");
                 $("#repagency").val('');
                 $("#repagency").css("background", "transparent none");
                 $("#repagency").css("border", "0px solid #EB6565");
                 $('#textarea2').val('Forget Password..');
+                setTimeout($.unblockUI, 2500);
+            }, // success function ends
+            error: function(xhr, textStatus, errorThrown) {
+                console.log("server unreachable");
+                return;
             }
         })
     });
@@ -232,13 +238,7 @@ $(function() {
             event.preventDefault();
             return;
         }
-        $.blockUI({ message: '<h3><img src="./CSS/img/slogo.png" /> Please Wait...</h3>',
-            css: { border: '4px solid #6E6E6E',
-                width:   '22%',
-                backgroundColor:'#fff',
-                opacity:     0.2,
-                top:    '25%',
-                left:   '40%' }  })
+        block("Please Wait...");
         $('#sku').html('');
         $("#dateip").val('');
         $("#hoursip").val('');
@@ -268,6 +268,12 @@ $(function() {
                     + '>' + '<input id=' + '"' + data.STOCK[index].SKU + '"' + ' type="' + 'number'
                     + '" data-mini=' + '"true' + '"></div></div>' );
                 });
+            }, // success function ends
+            error: function(xhr, textStatus, errorThrown) {
+                $.unblockUI();
+                event.preventDefault();
+                console.log("server unreachable");
+                return;
             }
         }) // ajax ends
         setTimeout($.unblockUI, 100);
@@ -291,6 +297,12 @@ $(function() {
         var stat = document.getElementById('statusdd').value;
         var hour = $('#hoursip').val();
         var sNote = document.getElementById('textarea1').value;
+        $("#dateip").css("background", "none");
+        $("#dateip").css("border", "0");
+        $("#hoursip").css("background", "none");
+        $("#hoursip").css("border", "0");
+        $("#textarea1").css("background", "none");
+        $("#textarea1").css("border", "0");
         if (dat.length == 0) {
             $("#dateip").css("background", "#F0DDDD");
             $("#dateip").css("border", "3px solid #EB6565");
@@ -309,13 +321,8 @@ $(function() {
             event.preventDefault();
             return;
         }
-        $.blockUI({ message: '<h3><img src="./CSS/img/slogo.png" /> Please Wait...</h3>',
-            css: { border: '4px solid #6E6E6E',
-                width:   '22%',
-                backgroundColor:'#fff',
-                opacity:     0.2,
-                top:    '25%',
-                left:   '40%' }  })
+
+        block("Please Wait...");
         $.ajax({
             url: gURL,
             dataType: 'json',
@@ -336,6 +343,12 @@ $(function() {
                 // Your Code here
                 var sTickID = '#' + sTick;
                 $(sTickID).remove();
+            }, // success function ends
+            error: function(xhr, textStatus, errorThrown) {
+                $.unblockUI();
+                event.preventDefault();
+                console.log("server unreachable");
+                return;
             }
         }) // Ajax ends
         setTimeout($.unblockUI, 2000);
@@ -374,5 +387,15 @@ function cOnline() {
         setTimeout($.unblockUI, 2200);
         return ("offline");
     }
+}
+
+function block(a) {
+    $.blockUI({ message: '<h3><img src="./CSS/img/slogo.png" />' + a + '</h3>',
+        css: { border: '2px solid #6E6E6E',
+            width:   '42%',
+            backgroundColor:'#fff',
+            opacity:     0.8,
+            top:    '35%',
+            left:   '40%' }  })
 }
 
