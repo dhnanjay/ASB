@@ -89,10 +89,7 @@
         width: 60%;
     }
 }
-.ui-header {
-    height: 50px;
-    background-color: #A8AEB3;
-}
+
 .ui-header, .ui-footer {
     border-width: 0px 0px;
     border-top-width: 0px;
@@ -101,6 +98,14 @@
     border-left-width: 0px;
     border-color: #3388CC;
 }
+
+.ui-header {
+    height: 50px;
+    background-color: #A8AEB3;
+    border-top-width: 13px;
+    border-color: #A8AEB3 #A8AEB3 #3388CC;
+}
+
 
 .ui-btn:hover,.html .ui-body-a .ui-btn:hover {
     background-color: #199914;
@@ -132,10 +137,22 @@
     top: 0.1em;
     right: 0.2em;
 }
-. ui-btn-icon-left {
-    background-color: #A8AEB3;
-    border-width: 0px 0px;
+
+#backbtn1 {
     border-bottom-width: 0px;
+}
+#backbtn2 {
+    border-bottom-width: 0px;
+}
+#backbtn3 {
+    border-bottom-width: 0px;
+}
+
+.custom-back-icon{
+    background: url("./img/back.png") 50% 50% no-repeat !important;
+    background-size: 20px 24px;
+    width:20px !important;
+    height:24px !important;
 }
 
 .ui-listview > .ui-li-divider {
