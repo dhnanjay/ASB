@@ -6,28 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link href="./CSS/jqm.css" rel="stylesheet">
-    <link href="./CSS/style.css" rel="stylesheet">
+    <link href="./css/jqm.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
     <script src="./scripts/jQuery.js"></script>
     <script src="./scripts/jqm.js"></script>
     <script src="./scripts/blockUI.js"></script>
     <script src="./scripts/script.js"></script>
-    <script>               
-        function onDeviceReady(){
-            intel.xdk.device.hideSplashScreen();   
-        }        
-        document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);        
-    </script>
+
 </head>
 <body>
 <div data-role="page" data-control-title="Home" id="page1" style="background-color: #ffffff">
     <div data-theme="h" data-role="header">
         <span class="ui-title"></span>
-        <img src="./CSS/img/hlogo.png" class="ui-btn-right" />
+        <img src="./css/img/hlogo.png" class="ui-btn-right" />
     </div>
     <div role="main" class="ui-content">
         <div style=" text-align:center" data-controltype="image" id="logo">
-            <img style="width: 80%; height: 150px" src="./CSS/img/americanstandard-logo.gif">
+            <img style="width: 80%; height: 150px" src="./css/img/americanstandard-logo.gif">
         </div>
         <div class="ui-field-contain Inputbox" data-controltype="textinput">
             <input name="" id="usrname" placeholder="Username" value="" type="text" required>
@@ -85,7 +80,7 @@
 <div data-role="page" data-control-title="jobList" id="page2" style="background-color: #ffffff">
     <div data-theme="a" data-role="header">
         <h1 id="pg2" class="ui-title hdr"></h1>
-        <img src="./CSS/img/hlogo.png" class="ui-btn-right" />
+        <img src="./css/img/hlogo.png" class="ui-btn-right" />
     </div>
     <div role="main" class="ui-content">
         <div data-controltype="textblock">
@@ -112,7 +107,7 @@
         <a id="backbtn1" data-inline="true" data-rel="back" href="#page2"  data-iconpos="left"
             class="custom-back-icon">
         </a>
-        <img src="./CSS/img/hlogo.png" class="ui-btn-right" />
+        <img src="./css/img/hlogo.png" class="ui-btn-right" />
     </div>
     <div role="main" class="ui-content">
 
@@ -136,12 +131,12 @@
             </li>
             <li data-role="list-divider"> Notes </li>
             <li data-theme="a">
-                <p id="Notes"> </p>
+                 <p id="Notes" class="cNotes"> </p>
             </li>
         </ul>
         <!-- -->
         <a id="confBtn" data-transition="slide" href="#page4" class="ui-btn ">
-            Confirm
+            Continue
         </a>
     </div>
     <div data-theme="a" data-role="footer" data-position="fixed">
@@ -151,11 +146,11 @@
 </div>
 <div data-role="page" data-control-title="capData" id="page4">
     <div data-theme="a" data-role="header" class="hdr">
-        <span class="ui-title"></span>
+        <span class="ui-title" id="title4"></span>
         <a id="backbtn2" data-rel="back" href="#page4"  data-iconpos="left"
            class="custom-back-icon">
         </a>
-        <img src="./CSS/img/hlogo.png" class="ui-btn-right" />
+        <img src="./css/img/hlogo.png" class="ui-btn-right" />
     </div>
     <div role="main" class="ui-content">
         <div class="ui-field-contain" data-controltype="dateinput">
@@ -168,25 +163,14 @@
             <label for="hoursip">
                 Hours
             </label>
-            <input name="" id="hoursip" placeholder="Enter Hours" value="" type="time">
+            <input name="" id="hoursip" placeholder="Enter Hours" value="" type="number" step="0.5">
         </div>
         <div class="ui-field-contain" data-controltype="selectmenu">
             <label for="statusdd">
                 Status
             </label>
             <select id="statusdd" name="">
-                <option value="E0001">
-                    Open
-                </option>
-                <option value="E0002">
-                    In Process
-                </option>
-                <option value="E0006">
-                    Closed with Cust. Satisfaction
-                </option>
-                <option value="E0007">
-                    Closed without Cust. Satisfaction
-                </option>
+
             </select>
         </div>
         <div id="collapsid" data-role="collapsible-set">
@@ -207,7 +191,7 @@
 
         <!--   <input id="submitBtn" class="show-page-loading-msg" type="submit" value="Submit"> -->
         <a id="submitBtn" data-transition="flip" href="#page2" class="ui-btn ">
-            Submit
+            Update
         </a>
     </div>
 
@@ -218,7 +202,7 @@
         <a id="backbtn3" data-rel="back" data-transition="slide" href="#page1"
            data-iconpos="left" class="custom-back-icon">
         </a>
-        <img src="./CSS/img/hlogo.png" class="ui-btn-right" />
+        <img src="./css/img/hlogo.png" class="ui-btn-right" />
     </div>
     <div role="main" class="ui-content">
         <div class="ui-field-contain" data-controltype="textinput">

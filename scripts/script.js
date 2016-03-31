@@ -3,9 +3,11 @@
  */
 
 // Global Variables Service Ticket
-var gURL = 'http://colxd136.asa.hq.pvt:8002/sap/bc/webrfc?_FUNCTION=ZFM_MOBILE';
+// var gURL = 'http://colxd136.asa.hq.pvt:8002/sap/bc/webrfc?_FUNCTION=ZFM_MOBILE';
+var gURL = "https://salescrm.americanstandard.com/sap/bc/webrfc?_FUNCTION=ZFM_MOBILE";
 var sTick = '';
 var gVendorID = '';
+var gUsr = '';
 var prd = [];
 // Get data from local storage
 $(document).ready(function() {
@@ -20,6 +22,7 @@ $(function() {
         var pswd = $('#pswd').val();
         var stDate = '';
         sTick = '';
+        gUsr = usr;
         if (cOnline() === "offline") {
             event.preventDefault();
             return;
@@ -69,9 +72,10 @@ $(function() {
                 localStorage.setItem("vendor",gVendorID);
             }, // success function ends
             error: function(xhr, textStatus, errorThrown) {
-                $.unblockUI();
+                noServer();
                 event.preventDefault();
                 console.log("server unreachable");
+                $.unblockUI();
                 return;
             }
         }); // Ajax Ends
@@ -98,6 +102,7 @@ function myfunction(a) {
     $('#pName').html('');
     $('#pNDesc').html('');
     $('#Notes').html('');
+    $('#title4').html('');
     $.ajax({
         url: gURL,
         dataType: 'json',
@@ -112,6 +117,7 @@ function myfunction(a) {
             // Your Code here
             try {
                 $('#cName').append(data.PARTNER[0].ZZBUSINESSNA);
+                $('#title4').append(data.PARTNER[0].ZZBUSINESSNA);
                 $('#aDdr').append(data.PARTNER[0].HOUSE_NO + '  ' + data.PARTNER[0].STREET + '  ' + data.PARTNER[0].CITY +
                 '  ' + data.PARTNER[0].REGION + '  ' + data.PARTNER[0].POSTL_COD1 + '<BR>' + 'Phone: ' +
                 data.PARTNER[0].TELEPHONE + '<BR>' + 'Email: ' + data.PARTNER[0].E_MAIL);
@@ -119,13 +125,14 @@ function myfunction(a) {
                 $('#sTDesc').append(stDesc);
                 $('#pName').append('Product Name: ' + data.PARTNER[0].ORDERED_PROD);
                 $('#pNDesc').append(data.PARTNER[0].DESCRIPTION);
-                $.each(data.TEXT, function(index) { $('#Notes').append(data.TEXT[index].TDLINE); });
+                $.each(data.TEXT, function(index) { $('#Notes').append( '<p class=' + '"cNotes' + '">' + data.TEXT[index].TDLINE ) + '</p>'  });
             } // try
             catch(err) {
                 console.log(err.message);
             }
         }, // success function ends
         error: function(xhr, textStatus, errorThrown) {
+            noServer();
             $.unblockUI();
             event.preventDefault();
             console.log("server unreachable");
@@ -181,57 +188,7 @@ function dateFormatter(a) {
     return mT;
 }
 
-$(function() {
-    $('#helpSubmit').click(function(event) {
-        if (cOnline() == "offline") {
-            event.preventDefault();
-            return;
-        }
-        var repagency = $('#repagency').val();
-        if (repagency.length == 0) {
-            $("#repagency").css("background", "#F0DDDD");
-            $("#repagency").css("border", "3px solid #EB6565");
-            event.preventDefault();
-            return;
-        }
-        var emailip = $('#emailip').val();
-        var phoneip = $('#phoneip').val();
-        var hNote = $('#textarea2').val();
-        var usr  = $('#usrname').val();
-        var pswd = $('#pswd').val();
-        if (usr.length == 0) { user = 'Not Available';}
-        if (pswd.length == 0) { pswd = 'Not Available';}
-        $.ajax({
-            url: gURL,
-            dataType: 'json',
-            type: 'POST',
-            async: false,
-            cache: false,
-            data: {
-                zname: 'HELP',
-                agency: repagency,
-                email: emailip,
-                phone: phoneip,
-                text: hNote,
-                usr: usr,
-                pswd: pswd
-            },
-            success: function(data) {
-                // Your Code here
-                block("Request Submitted");
-                $("#repagency").val('');
-                $("#repagency").css("background", "transparent none");
-                $("#repagency").css("border", "0px solid #EB6565");
-                $('#textarea2').val('Forget Password..');
-                setTimeout($.unblockUI, 2500);
-            }, // success function ends
-            error: function(xhr, textStatus, errorThrown) {
-                console.log("server unreachable");
-                return;
-            }
-        })
-    });
-}); // function ends
+// Navigate from "Continue" page to "Update" page
 $(function() {
     $('#confBtn').click(function(event) {
         if (cOnline() == "offline") {
@@ -243,6 +200,7 @@ $(function() {
         $("#dateip").val('');
         $("#hoursip").val('');
         $("#textarea1").val('');
+        $("#statusdd").html('');
         prd = [];
         $.ajax({
             url: gURL,
@@ -268,11 +226,15 @@ $(function() {
                     + '>' + '<input id=' + '"' + data.STOCK[index].SKU + '"' + ' type="' + 'number'
                     + '" data-mini=' + '"true' + '"></div></div>' );
                 });
+                $.each(data.STATUS, function(index) {
+                   $('#statusdd').append('<option value=' + data.STATUS[index].ESTAT + '>' + data.STATUS[index].TXT30 + '</option>');
+                });
             }, // success function ends
             error: function(xhr, textStatus, errorThrown) {
-                $.unblockUI();
+                noServer();
                 event.preventDefault();
                 console.log("server unreachable");
+                $.unblockUI();
                 return;
             }
         }) // ajax ends
@@ -337,7 +299,8 @@ $(function() {
                 status: stat,
                 notes: sNote,
                 sTick: sTick,
-                BPID: gVendorID
+                BPID: gVendorID,
+                user: gUsr
             },
             success: function(data) {
                 // Your Code here
@@ -345,6 +308,7 @@ $(function() {
                 $(sTickID).remove();
             }, // success function ends
             error: function(xhr, textStatus, errorThrown) {
+                noServer();
                 $.unblockUI();
                 event.preventDefault();
                 console.log("server unreachable");
@@ -353,6 +317,62 @@ $(function() {
         }) // Ajax ends
         setTimeout($.unblockUI, 2000);
     }); // click function ends
+}); // function ends
+
+// Help Page
+$(function() {
+    $('#helpSubmit').click(function(event) {
+        if (cOnline() == "offline") {
+            event.preventDefault();
+            return;
+        }
+        var repagency = $('#repagency').val();
+        if (repagency.length == 0) {
+            $("#repagency").css("background", "#F0DDDD");
+            $("#repagency").css("border", "3px solid #EB6565");
+            event.preventDefault();
+            return;
+        }
+        var emailip = $('#emailip').val();
+        var phoneip = $('#phoneip').val();
+        var hNote = $('#textarea2').val();
+        var usr  = $('#usrname').val();
+        var pswd = $('#pswd').val();
+        if (usr.length == 0) { usr = 'Not Available';}
+        if (pswd.length == 0) { pswd = 'Not Available';}
+        $.ajax({
+            url: gURL,
+            dataType: 'json',
+            type: 'POST',
+            async: false,
+            cache: false,
+            data: {
+                zname: 'HELP',
+                agency: repagency,
+                email: emailip,
+                phone: phoneip,
+                text: hNote,
+                usr: usr,
+                pswd: pswd
+            },
+            success: function(data) {
+                // Your Code here
+                block("Request Submitted");
+                $("#repagency").val('');
+                $("#phoneip").val('');
+                $("#emailip").val('');
+                $("#repagency").css("background", "transparent none");
+                $("#repagency").css("border", "0px solid #EB6565");
+                $('#textarea2').val('Forget Password..');
+                setTimeout($.unblockUI, 2500);
+            }, // success function ends
+            error: function(xhr, textStatus, errorThrown) {
+                noServer();
+                console.log("server unreachable");
+                return;
+            }
+        })
+    });
 }); // function ends
 
 // Function cDate =  get current date
@@ -377,13 +397,14 @@ function cOnline() {
     if (window.navigator.onLine) {
         return null;
     } else {
-        $.blockUI({ message: '<h3><img src="./CSS/img/slogo.png" /> No Internet !</h3>',
-            css: { border: '4px solid #6E6E6E',
-                width:   '22%',
-                backgroundColor:'#fff',
-                opacity:     0.8,
-                top:    '25%',
-                left:   '40%' }  });
+  //      $.blockUI({ message: '<h3><img src="./CSS/img/slogo.png" /> No Internet !</h3>',
+    //        css: { border: '4px solid #6E6E6E',
+      //          width:   '22%',
+        //        backgroundColor:'#fff',
+          //      opacity:     0.8,
+            //    top:    '25%',
+              //  left:   '40%' }  });
+        block("No internet");
         setTimeout($.unblockUI, 2200);
         return ("offline");
     }
@@ -399,3 +420,8 @@ function block(a) {
             left:   '40%' }  })
 }
 
+function noServer() {
+        block("Server Unreachable");
+        setTimeout($.unblockUI, 2200);
+        // return ("unreachable");
+}
