@@ -72,9 +72,20 @@ $(function() {
                 localStorage.setItem("vendor",gVendorID);
             }, // success function ends
             error: function(xhr, textStatus, errorThrown) {
-                noServer();
                 event.preventDefault();
-                console.log("server unreachable");
+                if (xhr.status == 200 )
+                {
+                    console.log('Invalid Login');
+                    $("#usrname").css("background", "#F0DDDD");
+                    $("#usrname").css("border", "3px solid #EB6565");
+                    $("#pswd").css("background", "#F0DDDD");
+                    $("#pswd").css("border", "3px solid #EB6565");
+
+                }
+                else {
+                     noServer();
+                     console.log("server unreachable");
+                }
                 $.unblockUI();
                 return;
             }
