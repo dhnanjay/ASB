@@ -211,7 +211,7 @@ $(function() {
         $("#dateip").val('');
         $("#hoursip").val('');
         $("#textarea1").val('');
-        $("#statusdd").html('');
+        // $("#statusdd").html('');
         prd = [];
         $.ajax({
             url: gURL,
@@ -237,9 +237,7 @@ $(function() {
                     + '>' + '<input id=' + '"' + data.STOCK[index].SKU + '"' + ' type="' + 'number'
                     + '" data-mini=' + '"true' + '"></div></div>' );
                 });
-                $.each(data.STATUS, function(index) {
-                   $('#statusdd').append('<option value=' + data.STATUS[index].ESTAT + '>' + data.STATUS[index].TXT30 + '</option>');
-                });
+
             }, // success function ends
             error: function(xhr, textStatus, errorThrown) {
                 noServer();
