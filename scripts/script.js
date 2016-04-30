@@ -261,11 +261,11 @@ $(function() {
         var prdVal = [];
         $.each(prd, function(index) {
             var uQuan = document.getElementById(prd[index].SKU).value;
-            var pVal = prd[index].SKU + '-' + uQuan;
+            var pVal = prd[index].SKU + '~' + uQuan;
             prdVal.push(pVal);
         });
         var dat = document.getElementById('dateip').value;
-        var stat = document.getElementById('statusdd').value;
+    //    var stat = document.getElementById('statusdd').value;
         var hour = $('#hoursip').val();
         var sNote = document.getElementById('textarea1').value;
         $("#dateip").css("background", "none");
@@ -296,8 +296,9 @@ $(function() {
         block("Please Wait...");
         $.ajax({
             url: gURL,
-            dataType: 'json',
+         //   dataType: 'json',
             type: 'POST',
+          //  async: false,
             cache: false,
             //   processData: false,
             data: {
@@ -305,7 +306,7 @@ $(function() {
                 prd: prdVal,
                 date: dat,
                 hour: hour,
-                status: stat,
+             //   status: stat,
                 notes: sNote,
                 sTick: sTick,
                 BPID: gVendorID,
