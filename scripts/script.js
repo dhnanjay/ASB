@@ -3,8 +3,7 @@
  */
 
 // Global Variables Service Ticket
-// var gURL = 'http://colxd136.asa.hq.pvt:8002/sap/bc/webrfc?_FUNCTION=ZFM_MOBILE';
-var gURL = "https://salescrm.americanstandard.com/sap/bc/webrfc?_FUNCTION=ZFM_MOBILE";
+
 var sTick = '';
 var gVendorID = '';
 var gUsr = '';
